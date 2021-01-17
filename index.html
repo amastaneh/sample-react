@@ -2,9 +2,30 @@
 
 <head>
     <title>Sample React</title>
+    <script>
+        function sum() {
+            let num1 = document.getElementById("num1").value;
+            let num2 = document.getElementById("num2").value;
+            let result = parseFloat(num1) + parseFloat(num2);
+            document.getElementById("result").innerHTML = result;
+        }
+    </script>
 </head>
 
 <body>
+    <h1>Sample Form</h1>
+    <div>
+        <label>Number 1: </label>
+        <input id="num1" value=42></input>
+    </div>
+    <div>
+        <label>Number 2: </label>
+        <input id="num2" value=52></input>
+    </div>
+    <div>
+        <label id="result">---</label>
+    </div>
+    <button onclick="sum()">Submit 2</button>
 </body>
 
 </html>
