@@ -2,12 +2,65 @@
 
 <head>
     <title>Sample React</title>
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://sample-4aba.restdb.io/rest/_jsapi.js"></script>
     <script>
-        function sum() {
+        // [POST] a comment to a record and replace html element with updated record
+        var sum = function(evt) {
+            alert("start saving...")
             let num1 = document.getElementById("num1").value;
             let num2 = document.getElementById("num2").value;
             let result = parseFloat(num1) + parseFloat(num2);
-            document.getElementById("result").innerHTML = result;
+            console.log("result", result);
+
+            var jsondata = {
+                "a": num1,
+                "b": num2
+            };
+            console.log("jsondata: ", jsondata);
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://sample-4aba.restdb.io/rest/table2",
+                "method": "POST",
+                "headers": {
+                    "content-type": "application/json",
+                    "x-apikey": "6003d8951346a1524ff12b55",
+                    "cache-control": "no-cache"
+                },
+                "processData": false,
+                "data": JSON.stringify(jsondata)
+            }
+
+            $.ajax(settings)
+                .done(function(response) {
+                    console.log(response);
+                    alert("success");
+                });
+
+        }
+
+        // [GET] a comment to a record and replace html element with updated record
+        var get = () => {
+            alert("start loading...")
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://sample-4aba.restdb.io/rest/table2",
+                "method": "GET",
+                "headers": {
+                    "content-type": "application/json",
+                    "x-apikey": "6003d8951346a1524ff12b55",
+                    "cache-control": "no-cache"
+                }
+            }
+
+            $.ajax(settings).done(function(response) {
+                console.log(response);
+                response.map(res => {
+                    alert(`${res.a} - ${res.b}`)
+                })
+            });
         }
     </script>
 </head>
@@ -26,6 +79,7 @@
         <label id="result">---</label>
     </div>
     <button onclick="sum()">Submit 2</button>
+    <button onclick="get()">Get</button>
 </body>
 
 </html>
