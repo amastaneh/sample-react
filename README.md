@@ -1,5 +1,5 @@
 # sample-react
 This is our first training application based on react. 
-Version: 0.2
+Version: 0.3
 
 
